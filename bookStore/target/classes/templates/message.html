@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeLeaf.com">
+<head>
+    <meta charset="UTF-8">
+    <title>Book Saved</title>
+    <style>
+        body {
+            background-color: #f9f9f9;
+            font-family: 'Segoe UI', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .loading-container {
+            text-align: center;
+        }
+
+        .loader {
+            border: 6px solid #f3f3f3;
+            border-top: 6px solid #4CAF50;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .message {
+            font-size: 1.2rem;
+            color: #333;
+        }
+    </style>
+    <script>
+        window.onload = function() {
+            alert("✅ Book saved successfully!");
+            setTimeout(function() {
+                window.location.href = "/available_books";
+            }, 2000); // redirect after 2 seconds
+        };
+    </script>
+</head>
+<body>
+<div class="loading-container">
+    <div class="loader"></div>
+    <div class="message">Redirecting to Available Books...</div>
+</div>
+</body>
+</html>
