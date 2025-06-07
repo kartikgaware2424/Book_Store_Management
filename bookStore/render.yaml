@@ -1,10 +1,7 @@
 services:
   - type: web
     name: book-store
-    env: java
-    buildCommand: "./mvnw clean install"
-    startCommand: "java -jar target/*.jar"
+    env: docker
     plan: free
-    envVars:
-      - key: SPRING_PROFILES_ACTIVE
-        value: production
+    dockerfilePath: Dockerfile
+    autoDeploy: true
