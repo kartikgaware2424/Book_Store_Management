@@ -46,7 +46,7 @@
 <body>
 
 <div class="container">
-    <h2>📚 Available Books</h2>
+    <h2>📚 My Books</h2>
 
     <div class="row row-cols-1 row-cols-md-3 g-4" th:if="${book != null and !book.isEmpty()}">
         <div class="col" th:each="b : ${book}">
@@ -56,12 +56,13 @@
                     <p class="card-text"><strong>Author:</strong> <span th:text="${b.author}">Author</span></p>
                     <p class="card-text"><strong>Category:</strong> <span th:text="${b.category}">Category</span></p>
                     <p class="card-text"><strong>Price:</strong> $<span th:text="${b.price}">0.00</span></p>
-
+                    <a th:href="@{/deleteList/{id}(id=${b.id})}" class="btn btn-success">Remove Book</a>
 
                 </div>
             </div>
         </div>
     </div>
+
 
     <div class="text-center" th:if="${book == null or book.isEmpty()}">
         <p class="text-muted fs-5">No books available right now.</p>
@@ -69,6 +70,8 @@
 </div>
 
 <a href="/" class="btn btn-secondary btn-lg mt-3 ms-3"> Main Menu</a>
+<a href="/getPrice" class="btn btn-secondary btn-lg mt-3 ms-3"> Order Now</a>
+
 <footer>
     &copy; 2025 My Book Store. All rights reserved.
 </footer>

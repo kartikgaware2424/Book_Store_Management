@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Total Book Price</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: #f8f9fa;
+            padding-bottom: 50px;
+        }
+        h1, h2 {
+            margin-top: 20px;
+            text-align: center;
+        }
+        footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #343a40;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+        }
+        .card {
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .btn {
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>📚 My Book List</h1>
+
+    <!-- Book List Summary -->
+    <ul class="list-group my-4" th:each="book : ${book}">
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            <span>
+                <strong th:text="${book.title}">Book Title</strong>
+            </span>
+            <span class="badge bg-primary rounded-pill" th:text="'₹' + ${book.price}">0.0</span>
+        </li>
+    </ul>
+
+    <!-- Total Price -->
+    <div class="alert alert-info text-center">
+        <h2>Total Price: ₹<span th:text="${totalPrice}">0.0</span></h2>
+    </div>
+
+    <!-- Book Cards -->
+    <div class="row row-cols-1 row-cols-md-3 g-4 mb-4" th:if="${book != null and !book.isEmpty()}">
+        <div class="col" th:each="b : ${book}">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${b.title}">Book Title</h5>
+                    <p class="card-text"><strong>Author:</strong> <span th:text="${b.author}">Author</span></p>
+                    <p class="card-text"><strong>Category:</strong> <span th:text="${b.category}">Category</span></p>
+                    <p class="card-text"><strong>Price:</strong> ₹<span th:text="${b.price}">0.00</span></p>
+                    <a th:href="@{/deleteList/{id}(id=${b.id})}" class="btn btn-danger w-100">Remove Book</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Empty State -->
+    <div class="text-center" th:if="${book == null or book.isEmpty()}">
+        <p class="text-muted fs-5">No books available right now.</p>
+    </div>
+
+    <!-- Navigation Buttons -->
+    <div class="text-center mt-4">
+        <a href="/" class="btn btn-secondary btn-lg">Main Menu</a>
+        <a href="/getPrice" class="btn btn-success btn-lg">Order Now</a>
+    </div>
+</div>
+
+<footer>
+    &copy; 2025 My Book Store. All rights reserved.
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

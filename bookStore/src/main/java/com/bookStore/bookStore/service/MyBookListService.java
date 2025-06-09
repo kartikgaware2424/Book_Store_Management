@@ -20,4 +20,8 @@ public class MyBookListService {
     {
         return myRepo.findAll();
     }
+    public void deleteMyBook(int id)
+    {
+        myRepo.deleteById(id);
+    }
 }

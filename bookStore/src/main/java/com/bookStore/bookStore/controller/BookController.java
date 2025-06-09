@@ -49,20 +49,43 @@ public class BookController {
       return new ModelAndView("available_book","book",list);
     }
 @GetMapping("/my_books")
-    public String getMyBooks(Model model)
+public String getMyBooks(Model model)
 {
     List<MyBookList> list=myBookService.getmyAllBooks();
     model.addAttribute("book",list);
     return  "my_books";
 }
 @RequestMapping("/myList/{id}")
-    public String getMyList(@PathVariable("id") int id)
+public String getMyList(@PathVariable("id") int id)
 {
     Book b=service.getById(id);
     MyBookList mb=new MyBookList(b.getId(),b.getTitle(),b.getAuthor(),b.getCategory(),b.getPrice());
     myBookService.saveMyBooks(mb);
     return "redirect:/my_books";
 }
+
+    @RequestMapping("deleteList/{id}")
+    public String deleteBook(@PathVariable("id") int id)
+    {
+        myBookService.deleteMyBook(id);
+        return "redirect:/my_books";
+
+    }
+    @GetMapping("/getPrice")
+    public String getPrice(Model model)
+    {
+        List<MyBookList> list = myBookService.getmyAllBooks();
+        double totalPrice = 0.0;
+
+        for (MyBookList book : list) {
+            totalPrice += Double.parseDouble(book.getPrice());
+
+        }
+
+        model.addAttribute("totalPrice", totalPrice);
+        model.addAttribute("book", list); // Optional: to show list of books if needed
+        return "getPrice";
+    }
 
 
 }
